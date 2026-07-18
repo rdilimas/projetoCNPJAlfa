@@ -66,7 +66,7 @@ def calcularDigVerificador(vlrsConvertidos, dig):
     soma = 0
     pesos = [5,4,3,2,9,8,7,6,5,4,3,2]
     if dig == 2:
-        pesos.insert(0, 6)
+        pesos = [6] + pesos
 
     for i, peso in enumerate(pesos):
         produto = (peso * int(vlrsConvertidos[i]))
