@@ -41,8 +41,7 @@ def conversaoASCII(cnpj):
             vlrsConvertidosASCII.append(ord(char) - 48)
         else:
         #   print(f"Posição {i}: '{char}' é outro caractere (símbolo)")
-            print("Caractere inválido no CNPJ. O programa será encerrado.")
-            sys.exit(0)
+            raise ValueError("Caractere inválido no CNPJ. O programa será encerrado.")
 
     return vlrsConvertidosASCII       
 
@@ -94,7 +93,12 @@ def validarCNPJ(cnpj):
     if tamanho_is_valido:
        dig_eh_numerico = validarDigitoVerificador(cnpj)
        if dig_eh_numerico:
-          vlrsConvertidos = conversaoASCII(cnpj)
+          try:  
+              vlrsConvertidos = conversaoASCII(cnpj)
+          except ValueError as erro:
+                print(f"ERRO!!! CNPJ Inválido - {erro}")
+                return   
+           
           digVerificadorRecebido = [int(vlrsConvertidos[12]), int(vlrsConvertidos[13])]
         #   print("Valores convertidos ", vlrsConvertidos)
           calcularDigVerificador(vlrsConvertidos, 1)
