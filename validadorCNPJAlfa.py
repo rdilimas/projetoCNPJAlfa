@@ -66,7 +66,7 @@ def calcularPrimDig(vlrsConvertidos, dig):
         produto = (peso * int(vlrsConvertidos[i]))
         soma += int(produto)
         
-        resto = soma % 11
+    resto = soma % 11
     
     # Regra para definir o dígito
     if resto < 2:
