@@ -4,12 +4,7 @@ def verificarQtdDigitos(cnpj):
     """
     Verifica se a string do CNPJ possui exatamente 14 caracteres.
     """
-    qtd_digitos = len(cnpj)
-
-    if qtd_digitos != 14:
-       return False
-    else:
-       return True
+    return len(cnpj) == 14
        
 
 
