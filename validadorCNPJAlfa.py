@@ -34,12 +34,11 @@ def conversaoASCII(cnpj):
     for i, char in enumerate(cnpj, start=1):
         if char.isdigit():
         #  print(f"Posição {i}: '{char}' é numérico")
-            vlrsConvertidosASCII.append(char)
+            vlrsConvertidosASCII.append(int(char))
         elif char.isalpha():
-            valor_ASCII = ord(char)
-            valor_ASCII = valor_ASCII - 48 ## Transformar o 48 em parametro
+        # Transformar o 48 em parametro
         #  print(f"Posição {i}: '{char}' é alfabético, ASCII é {valor_ASCII}")
-            vlrsConvertidosASCII.append(valor_ASCII)
+            vlrsConvertidosASCII.append(ord(char) - 48)
         else:
         #   print(f"Posição {i}: '{char}' é outro caractere (símbolo)")
             print("Caractere inválido no CNPJ. O programa será encerrado.")
@@ -51,11 +50,19 @@ def conversaoASCII(cnpj):
 
     print("CNPJ digitado", cnpj)
 
-def calcularPrimDig(vlrsConvertidos, dig):
+def calcularDigVerificador(vlrsConvertidos, dig):
     """
-    Calcula um dos dígitos verificadores do CNPJ usando pesos fixos.
+    Calcula o do dígito verificador do CNPJ usando pesos fixos.
     o primeiro dígitos é calculado com base nos 12 primeiros caracteres, 
     e o segundo com base nos 13 primeiros.
+
+    Calcula o dígito verificador do CNPJ.
+
+    Parâmetros:
+        vlrsConvertidos: lista com os valores numéricos do CNPJ.
+        dig: inteiro que indica qual dígito será calculado:
+            1 para o primeiro dígito verificador
+            2 para o segundo dígito verificador
     """
     soma = 0
     pesos = [5,4,3,2,9,8,7,6,5,4,3,2]
@@ -90,8 +97,8 @@ def validarCNPJ(cnpj):
           vlrsConvertidos = conversaoASCII(cnpj)
           digVerificadorRecebido = [int(vlrsConvertidos[12]), int(vlrsConvertidos[13])]
         #   print("Valores convertidos ", vlrsConvertidos)
-          calcularPrimDig(vlrsConvertidos, 1)
-          calcularPrimDig(vlrsConvertidos, 2)
+          calcularDigVerificador(vlrsConvertidos, 1)
+          calcularDigVerificador(vlrsConvertidos, 2)
           if (vlrsConvertidos[12:14] == digVerificadorRecebido):
               print("CNPJ Válido!")
           else:
